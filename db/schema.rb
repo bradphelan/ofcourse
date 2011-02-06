@@ -12,13 +12,6 @@
 
 ActiveRecord::Schema.define(:version => 20110206100113) do
 
-  create_table "course_users", :id => false, :force => true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "user_id"
-    t.integer  "course_id"
-  end
-
   create_table "courses", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -27,6 +20,13 @@ ActiveRecord::Schema.define(:version => 20110206100113) do
   end
 
   add_index "courses", ["user_id"], :name => "index_courses_on_user_id"
+
+  create_table "courses_users", :id => false, :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+    t.integer  "course_id"
+  end
 
   create_table "rails_admin_histories", :force => true do |t|
     t.string   "message"

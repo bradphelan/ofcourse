@@ -9,17 +9,17 @@
 require 'factory_girl'
 Dir[Rails.root.join("spec/factories/*.rb")].each {|f| require f}
 
-10.times do
-  o = Factory.create :organisation
 
-  10.times do
-    o.users << Factory.create(:user)
-  end
-   
+
+courses = 3.times.map do
   teacher = Factory.create :user
-  o.users << teacher
+  Factory.create(:course, :teacher => teacher) 
+end
 
-  course = Factory.create(:course, :organisation => o, :teacher => teacher) 
+10.times do |i|
+  u = Factory.create(:user)
+  u.courses << courses[i%3]
+end
+ 
   
 
-end
