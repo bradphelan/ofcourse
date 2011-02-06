@@ -4,6 +4,9 @@
   = csrf_meta_tag
   /[if lt IE 9]
     = javascript_include_tag 'html5'
+%title OfCourse
 %body
+  %p.notice= notice
+  %p.alert= alert
   = yield
   = javascript_include_tag :defaults
