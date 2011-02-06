@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110206091710) do
+ActiveRecord::Schema.define(:version => 20110206100113) do
 
   create_table "course_users", :id => false, :force => true do |t|
     t.datetime "created_at"
@@ -22,23 +22,11 @@ ActiveRecord::Schema.define(:version => 20110206091710) do
   create_table "courses", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "organisation_id"
     t.string   "name"
     t.integer  "user_id"
   end
 
   add_index "courses", ["user_id"], :name => "index_courses_on_user_id"
-
-  create_table "organisation_memberships", :id => false, :force => true do |t|
-    t.integer "user_id"
-    t.integer "organisation_id"
-  end
-
-  create_table "organisations", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "rails_admin_histories", :force => true do |t|
     t.string   "message"
