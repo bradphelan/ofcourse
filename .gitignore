@@ -10,3 +10,4 @@ config/mongoid.yml
 public/cache/
 public/stylesheets/compiled/
 public/system/*
+/ERD.pdf

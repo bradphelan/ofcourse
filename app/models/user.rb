@@ -9,6 +9,11 @@ class User < ActiveRecord::Base
 
   has_and_belongs_to_many :organisations, :join_table => :organisation_memberships
 
-  has_many :courses_to_manage, :class_name => 'Course', :foreign_key => :user_id
+  has_many :presentations, :class_name => 'Course', :foreign_key => :user_id
+
+  # The user should only be able to join courses that they
+  # are an organisation member of
+  has_and_belongs_to_many :courses
+
 
 end
