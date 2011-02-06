@@ -6,4 +6,9 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
+
+  has_and_belongs_to_many :organisations, :join_table => :organisation_memberships
+
+  has_many :courses_to_manage, :class_name => 'Course', :foreign_key => :user_id
+
 end
