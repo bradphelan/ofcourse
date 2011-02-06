@@ -1,7 +1,7 @@
 # Read about factories at http://github.com/thoughtbot/factory_girl
 
 Factory.sequence :name do |n|
-  "somebody#{n}"
+  "organisation #{n}"
 end
 
 Factory.define :organisation do |f|

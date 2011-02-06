@@ -1,5 +1,8 @@
 # Read about factories at http://github.com/thoughtbot/factory_girl
 
+User.delete_all
+Organisation.delete_all
+
 Factory.sequence :email do |n|
   "somebody#{n}@example.com"
 end
