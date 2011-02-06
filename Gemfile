@@ -45,4 +45,12 @@ group :cucumber do
   gem 'spork'
   gem 'launchy'
 end
+
+gem 'guard'
+gem 'guard-bundler'
+gem 'guard-cucumber'
+gem 'guard-livereload'
+gem 'guard-rspec'
+gem 'guard-sass'
+
 gem "compass"
