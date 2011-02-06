@@ -49,11 +49,14 @@ group :cucumber do
   gem 'launchy'
 end
 
-gem 'guard'
-gem 'guard-bundler'
-gem 'guard-cucumber'
-gem 'guard-livereload'
-gem 'guard-rspec'
-gem 'guard-sass'
+group :development do
+  gem "rails-erd"
+  gem 'guard'
+  gem 'guard-bundler'
+  gem 'guard-cucumber'
+  gem 'guard-livereload'
+  gem 'guard-rspec'
+  gem 'guard-sass'
+end
 
 gem "compass"

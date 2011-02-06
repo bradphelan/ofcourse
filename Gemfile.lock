@@ -138,6 +138,10 @@ GEM
       activesupport (= 3.0.3)
       bundler (~> 1.0)
       railties (= 3.0.3)
+    rails-erd (0.4.3)
+      activerecord (~> 3.0)
+      activesupport (~> 3.0)
+      ruby-graphviz (~> 0.9.18)
     rails3-generators (0.17.4)
       railties (>= 3.0.0)
     railties (3.0.3)
@@ -164,6 +168,7 @@ GEM
       activesupport (~> 3.0)
       railties (~> 3.0)
       rspec (~> 2.5.0)
+    ruby-graphviz (0.9.20)
     rubyzip (0.9.4)
     selenium-webdriver (0.1.2)
       childprocess (~> 0.1.5)
@@ -202,6 +207,7 @@ DEPENDENCIES
   launchy
   mysql2
   rails (= 3.0.3)
+  rails-erd
   rails3-generators
   rails_admin!
   remarkable_activemodel (>= 4.0.0.alpha4)
