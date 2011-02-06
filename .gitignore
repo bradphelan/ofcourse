@@ -1,3 +1,4 @@
+.*.sw*
 .bundle
 db/*.sqlite3
 log/*.log
@@ -9,5 +10,3 @@ config/mongoid.yml
 public/cache/
 public/stylesheets/compiled/
 public/system/*
-tmp/restart.txt/app/models/.user.rb.swp
-/app/models/.user.rb.swp
