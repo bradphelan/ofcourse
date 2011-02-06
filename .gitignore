@@ -9,4 +9,5 @@ config/mongoid.yml
 public/cache/
 public/stylesheets/compiled/
 public/system/*
-tmp/restart.txt
+tmp/restart.txt/app/models/.user.rb.swp
+/app/models/.user.rb.swp
