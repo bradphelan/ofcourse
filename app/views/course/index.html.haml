@@ -1,0 +1,6 @@
+%h1 Courses
+- @courses.each do |c|
+  %ul
+    %li 
+      =c.name
+      =link_to "edit", edit_course_path(c)

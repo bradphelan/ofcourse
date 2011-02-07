@@ -42,6 +42,8 @@ gem "haml"
 gem "rspec-rails", ">= 2.0.0.beta.19", :group => [:development, :test, :cucumber]
 gem "factory_girl_rails", :group => [:test, :cucumber]
 gem "remarkable_activemodel", ">=4.0.0.alpha4", :group => :test
+gem 'formtastic', '~> 1.1.0'
+
 group :cucumber do
   gem 'capybara'
   gem 'cucumber-rails'
