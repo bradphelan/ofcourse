@@ -1,5 +1,6 @@
 %h1 Course
 = semantic_form_for @course do |form|
-  = form.inputs
+  = form.inputs :name, :teacher
+  = form.input :description, :as => :ckeditor
   = form.buttons
 
