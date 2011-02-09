@@ -18,8 +18,7 @@
           =content_tag(:div, flash[type], :class => type) if flash[type]
         %div
           %section
-            :preserve
-              #{yield}
+            =yield
       #sidebar
         
         .section
