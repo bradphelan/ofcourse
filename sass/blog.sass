@@ -1,0 +1,91 @@
+@import "screen"
+
+span.title
+  +adjust-font-size-to(40px)
+  vertical-align: center
+
+// ---------------------------
+// This will be our grid model
+// ---------------------------
+body 
+  .container
+    +standard_border
+    padding: 1em
+    background-color: #ccc
+
+    #header
+      +columns(12)
+
+    #content
+
+      #logo
+        #logoimg
+          display: inline
+          #wave
+            +border-radius(15px, 15px)
+            +box-shadow(darken($background, 30%), 0, 0, 10px)
+            //+ie_css3
+            border-width: 5px
+            border-color: #1f1f1f
+            background-color: darken($background, 10%)
+            padding: 0.2em
+            margin: 0.2em
+            vertical-align: center
+
+      +columns(9)
+      +alpha
+
+    #sidebar
+      +columns(3)
+      +omega
+      .section
+        +standard_border
+        background: white
+        margin: 5px
+        padding: 5px
+      #whoami
+        +adjust-font-size-to(14px)
+
+      h2
+        margin: 0px
+        padding: 0px
+        margin-left: 0.5em
+      ul
+        li
+          padding: 0px
+        +no-bullets
+        padding: 0px
+        a
+          text-decoration: none
+
+    #footer
+      +full(12)
+
+// ---------------------------
+// End grid model
+// ---------------------------
+  
+/* code fragments */
+pre
+  margin-left: 0em
+  code
+    +standard_border
+    font-family: Monaco, monospace
+    background: black
+    overflow: auto
+    padding: 1em
+
+.date
+  color: darkblue 
+
+h1, h2, h3
+  a
+    text-decoration: none
+
+#sidebar
+
+
+
+
+
+    

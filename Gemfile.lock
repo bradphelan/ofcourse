@@ -62,6 +62,8 @@ GEM
       ffi (~> 0.6.3)
     compass (0.10.6)
       haml (>= 3.0.4)
+    compass-susy-plugin (0.8.1)
+      compass (>= 0.10.0)
     configuration (1.2.0)
     cucumber (0.10.0)
       builder (>= 2.1.2)
@@ -162,6 +164,7 @@ GEM
       rake (>= 0.8.7)
       thor (~> 0.14.4)
     rake (0.8.7)
+    rdiscount (1.6.8)
     remarkable (4.0.0.alpha4)
       rspec (>= 2.0.0.alpha11)
     remarkable_activemodel (4.0.0.alpha4)
@@ -205,6 +208,7 @@ DEPENDENCIES
   capybara
   ckeditor!
   compass
+  compass-susy-plugin
   cucumber-rails
   devise
   factory_girl_rails
@@ -224,6 +228,7 @@ DEPENDENCIES
   rails-erd
   rails3-generators
   rails_admin!
+  rdiscount
   remarkable_activemodel (>= 4.0.0.alpha4)
   rspec-rails (>= 2.0.0.beta.19)
   spork

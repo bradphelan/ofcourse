@@ -63,3 +63,5 @@ group :development do
 end
 
 gem "compass"
+gem "compass-susy-plugin"
+gem "rdiscount"
