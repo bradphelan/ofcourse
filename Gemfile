@@ -12,6 +12,7 @@ gem 'devise'
 
 gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
 
+gem 'ckeditor', :git => 'git://github.com/galetahub/rails-ckeditor.git', :branch => 'rails3'
 
 # Use unicorn as the web server
 # gem 'unicorn'

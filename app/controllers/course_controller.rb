@@ -11,7 +11,13 @@ class CourseController < ApplicationController
     #TODO protect against mass assignment
     @course = Course.find params[:id]
     @course.update_attributes params[:course]
-    @course.save!
-    redirect_to edit_course_path(@course)
+    @course.save
+    if @course.save
+      flash[:success] = "Course updated"
+      redirect_to edit_course_path(@course)              
+    else
+      flash[:error] = "Error"
+      render :edit
+    end
   end
 end

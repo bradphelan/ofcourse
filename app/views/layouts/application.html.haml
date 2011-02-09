@@ -4,8 +4,11 @@
   = csrf_meta_tag
   /[if lt IE 9]
     = javascript_include_tag 'html5'
+  = stylesheet_link_tag "formtastic"
 %title OfCourse
 %body
+  -[:notice,:error, :success].each do |type|
+    =content_tag(:div, flash[type], :class => type) if flash[type]
   %p.notice= notice
   %p.alert= alert
   = yield
