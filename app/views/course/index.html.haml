@@ -1,6 +1,18 @@
-%h1 Courses
-- @courses.each do |c|
-  %ul
-    %li 
-      =c.name
-      =link_to "edit", edit_course_path(c)
+#course_list
+  - @courses.each do |c|
+
+    %ul#courselist
+      %li 
+        .course_summary
+          %span.course_name
+            =c.name
+          taught by
+          %span.teacher_name
+            =c.teacher.name
+          - if user_signed_in?
+            =link_to "edit", edit_course_path(c)
+        .course_date
+          = c.date_of
+        .course_description
+          = c.description.html_safe
+

@@ -1,8 +1,11 @@
 @import "screen"
+@import "compass/utilities/lists"
 
 span.title
   +adjust-font-size-to(40px)
   vertical-align: center
+
+$bodycolor: #ccc
 
 // ---------------------------
 // This will be our grid model
@@ -11,7 +14,7 @@ body
   .container
     +standard_border
     padding: 1em
-    background-color: #ccc
+    background-color: $bodycolor
 
     #header
       +columns(12)
@@ -83,6 +86,31 @@ h1, h2, h3
     text-decoration: none
 
 #sidebar
+
+ul#courselist
+  +no-bullets 
+  li
+    padding: 0px
+    margin: 0px
+
+.course_description
+  +trailing-border(1px, 0.5)
+  background-color: lighten($bodycolor, 5%)
+  margin: 1em
+  padding: 0.5em
+
+.course_name
+  +adjust-font-size-to(18px)
+  font-weight: bold
+
+.teacher_name
+  +adjust-font-size-to(18px)
+  font-weight: bold
+  color: darkblue
+
+#course_list
+  padding: 1em
+
 
 
 

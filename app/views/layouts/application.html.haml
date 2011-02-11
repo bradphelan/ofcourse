@@ -1,7 +1,7 @@
 !!! 5
 %html
   %head
-    %link{:href => "/stylesheets/compiled/blog.css", :rel => "stylesheet", :type => "text/css"}
+    %link{:href => "/stylesheets/compiled/main.css", :rel => "stylesheet", :type => "text/css"}
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     = csrf_meta_tag
     /[if lt IE 9]
@@ -13,7 +13,10 @@
     .container
       #header
       #content
-        = link_to "Courses", course_index_path
+        #logo
+          %h1 
+            %a{:href => "/"}
+              %span.title Glen Eira U3A
         -[:notice,:error, :success].each do |type|
           =content_tag(:div, flash[type], :class => type) if flash[type]
         %div
@@ -23,15 +26,17 @@
         
         .section
           #whoami
-            %h2 BLAH1
-            :markdown
+            = link_to "Courses", course_index_path
 
         .section
           #contacts
-            %h2 BLAH2
-        
+            - if user_signed_in?
+              = link_to "Sign Out", destroy_user_session_path
+            - else
+              = link_to "Sign in", new_user_session_path
         .section
           #links
-            %h2 BLAH3
+            - if user_signed_in?
+              = link_to "New Course", new_course_path
 
       #footer
