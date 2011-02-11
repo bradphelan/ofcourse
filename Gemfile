@@ -6,13 +6,14 @@ gem 'rails', '3.0.3'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'mysql2'
- 
+gem 'declarative_authorization'
 
 gem 'devise'
 
 gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
 
 gem 'ckeditor', :git => 'git://github.com/galetahub/rails-ckeditor.git', :branch => 'rails3'
+
 
 # Use unicorn as the web server
 # gem 'unicorn'

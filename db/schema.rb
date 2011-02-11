@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110209181126) do
+ActiveRecord::Schema.define(:version => 20110211205706) do
 
   create_table "ckeditor_assets", :force => true do |t|
     t.string   "data_file_name",                                 :null => false
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(:version => 20110209181126) do
     t.string   "name"
     t.integer  "user_id"
     t.text     "description"
+    t.datetime "date_of",     :default => '2011-02-10 08:56:06'
   end
 
   add_index "courses", ["user_id"], :name => "index_courses_on_user_id"
@@ -59,6 +60,20 @@ ActiveRecord::Schema.define(:version => 20110209181126) do
   end
 
   add_index "rails_admin_histories", ["item", "table", "month", "year"], :name => "index_histories_on_item_and_table_and_month_and_year"
+
+  create_table "roles", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "role",        :limit => 25,  :null => false
+    t.string   "description", :limit => 140
+  end
+
+  create_table "roles_users", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "roles_id"
+    t.integer  "users_id"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email",                               :default => "", :null => false
