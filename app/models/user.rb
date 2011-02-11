@@ -11,10 +11,16 @@ class User < ActiveRecord::Base
 
   has_and_belongs_to_many :courses
 
+  has_and_belongs_to_many :roles
+
+  def role_symbols
+    roles.map do |role|
+      role.name.to_sym
+    end
+  end
 
   def name
     email
   end
-
 
 end

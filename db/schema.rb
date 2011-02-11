@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(:version => 20110211205706) do
     t.string   "name"
     t.integer  "user_id"
     t.text     "description"
-    t.datetime "date_of",     :default => '2011-02-10 08:56:06'
+    t.datetime "date_of",     :default => '2011-02-11 21:51:25'
   end
 
   add_index "courses", ["user_id"], :name => "index_courses_on_user_id"
@@ -64,15 +64,15 @@ ActiveRecord::Schema.define(:version => 20110211205706) do
   create_table "roles", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "role",        :limit => 25,  :null => false
+    t.string   "name",        :limit => 25,  :null => false
     t.string   "description", :limit => 140
   end
 
-  create_table "roles_users", :force => true do |t|
+  create_table "roles_users", :id => false, :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "roles_id"
-    t.integer  "users_id"
+    t.integer  "role_id"
+    t.integer  "user_id"
   end
 
   create_table "users", :force => true do |t|
