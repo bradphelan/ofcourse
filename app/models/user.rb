@@ -9,18 +9,25 @@ class User < ActiveRecord::Base
 
   has_many :presentations, :class_name => 'Course', :foreign_key => :user_id
 
-  has_and_belongs_to_many :courses
+  has_many :course_registrations
+  has_many :courses, :through => :course_registrations
 
   has_and_belongs_to_many :roles
 
+  public
+
+  # required for declarative_authorization
   def role_symbols
     roles.map do |role|
       role.name.to_sym
     end
   end
 
+  # Required for rails admin
   def name
     email
   end
+
+
 
 end
