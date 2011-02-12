@@ -10,9 +10,14 @@ gem 'declarative_authorization'
 
 gem 'devise'
 
-gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
+# Keep this until my pull request
+# https://github.com/sferik/rails_admin/pull/282
+# is accepted
+#gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
+gem 'rails_admin', :git => 'git://github.com/bradphelan/rails_admin.git'
 
 gem 'ckeditor', :git => 'git://github.com/galetahub/rails-ckeditor.git', :branch => 'rails3'
+gem 'paperclip'
 
 
 # Use unicorn as the web server
@@ -55,6 +60,12 @@ end
 
 group :development do
   gem "rails-erd"
+
+  gem 'spork'
+  gem 'rb-fsevent'
+  gem 'guard-spork'
+  gem 'rb-inotify'
+
   gem 'guard'
   gem 'guard-bundler'
   gem 'guard-cucumber'
