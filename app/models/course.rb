@@ -3,6 +3,7 @@ class Course < ActiveRecord::Base
 
   has_many :course_registrations
   has_many :students, :class_name => 'User', :through => :course_registrations, :source => :user
+  has_many :schedules
 
   validates_presence_of :teacher
   validates_presence_of :description
