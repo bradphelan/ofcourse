@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable, :lockable and :timeoutable
   devise :database_authenticatable, :registerable,
@@ -12,22 +13,39 @@ class User < ActiveRecord::Base
   has_many :course_registrations
   has_many :courses, :through => :course_registrations
 
-  has_and_belongs_to_many :roles
+  belongs_to :role
 
   public
 
-  # required for declarative_authorization
-  def role_symbols
-    roles.map do |role|
-      role.name.to_sym
-    end
+  #
+  # Typus adaptation
+  #
+
+  enable_as_typus_user
+
+  ROLE = Typus::Configuration.roles.keys.sort
+  LANGUAGE = Typus.locales
+
+  def self.authenticate(email, password)
+    resource = find_for_database_authentication({ :email=>email })
+    resource && resource.valid_password?( password ) ? resource : nil
   end
 
-  # Required for rails admin
-  def name
+  # Typus redefines it
+  def password_required?
+    true
+  end
+  
+  def first_name
     email
   end
 
+  def last_name
+  end
+
+  def preferences
+    ''
+  end
 
 
 end
