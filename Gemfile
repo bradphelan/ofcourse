@@ -14,11 +14,12 @@ gem 'devise'
 # https://github.com/sferik/rails_admin/pull/282
 # is accepted
 #gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
-gem 'rails_admin', :git => 'git://github.com/bradphelan/rails_admin.git'
+# gem 'rails_admin', :git => 'git://github.com/bradphelan/rails_admin.git'
 
-gem 'ckeditor', :git => 'git://github.com/galetahub/rails-ckeditor.git', :branch => 'rails3'
+# gem 'ckeditor', :git => 'git://github.com/galetahub/rails-ckeditor.git', :branch => 'rails3'
 gem 'paperclip'
 
+gem 'typus'
 
 # Use unicorn as the web server
 # gem 'unicorn'
