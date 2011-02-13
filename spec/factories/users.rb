@@ -25,16 +25,10 @@ Factory.define :user do |f|
   f.email { Factory.next :email }
   f.password 'testing'
   f.password_confirmation 'testing'
-  f.after_build do |u|
-    u.roles = [singleton(:user_role)]
-  end
-  #f.confirmed_at Time.now
+  f.role singleton(:user_role)
 end
 
 Factory.define :admin, :parent => :user do |f|
   f.email 'admin@admin.com'
-  f.after_build do |u|
-    u.roles = [ singleton(:admin_role), singleton(:user_role)]
-  end
-  #f.confirmed_at Time.now
+  f.role singleton(:admin_role)
 end

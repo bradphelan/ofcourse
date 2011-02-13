@@ -47,5 +47,26 @@ class User < ActiveRecord::Base
     ''
   end
 
+  def salt
+  end
+
+  def salt=(value)
+  end
+
+  def crypted_password=(value)
+  end
+
+  def token=(value)
+  end
+
+  def preferences
+    nil
+  end
+
+  def preference
+    nil
+  end
+
+
 
 end
