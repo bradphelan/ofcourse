@@ -179,6 +179,8 @@ GEM
       rspec (>= 2.0.0.alpha11)
     render_inheritable (1.0.0)
       rails (~> 3.0)
+    rest-client (1.6.1)
+      mime-types (>= 1.16)
     rspec (2.5.0)
       rspec-core (~> 2.5.0)
       rspec-expectations (~> 2.5.0)
@@ -258,6 +260,7 @@ DEPENDENCIES
   rb-inotify
   rdiscount
   remarkable_activemodel (>= 4.0.0.alpha4)
+  rest-client
   rspec-rails (>= 2.0.0.beta.19)
   ruby-debug19
   spork

@@ -73,6 +73,7 @@ group :development do
   gem 'guard-rspec'
   gem 'guard-sass'
   gem 'ruby-debug19'
+  gem 'rest-client'
 end
 
 gem "compass"
