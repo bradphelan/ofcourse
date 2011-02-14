@@ -25,9 +25,21 @@ class Schedule < ActiveRecord::Base
   DAYS = %w(monday tuesday wednesday thursday friday saturday sunday) 
 
   validate do
-    r = Schedule.where(overlap_query)
-    if r.size == 0
-      errors.add :base, "The following schedules [#{r.map(&:id).join(', ')}] are colliding" 
+    q = Schedule.where(coliding_schedules_query)
+    if q.count != 0
+      errors.add :base, "The following schedules [#{q.map(&:id).join(', ')}] are colliding" 
+    end
+  end
+
+  validate :end_time do
+    if start_time >= end_time
+      errors.add :end_time , "End time must be greater than start time"
+    end
+  end
+
+  validate :start_date do
+    if start_date > end_date
+      errors.add :end_date, "End time must be equal to or greater than start date"
     end
   end
 
@@ -84,7 +96,7 @@ class Schedule < ActiveRecord::Base
 
   def overlap_query field_lower, field_upper, p0, p1
     field_lower.lt(p0).and(field_upper.gt(p0)).
-      or(  field_lower.gt(p0).and(field_upper.lt(p1))  ). 
+      or(  field_lower.gteq(p0).and(field_upper.lteq(p1))  ). 
       or(  field_lower.lt(p1).and(field_upper.gt(p1))  ) 
   end
 
