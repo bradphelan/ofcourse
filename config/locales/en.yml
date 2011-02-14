@@ -3,3 +3,12 @@
 
 en:
   hello: "Hello world"
+
+en:
+  time:
+    formats:
+      time_of_day: '%H:%S'
+  date:
+    formats:
+      nice_date: '%d %b %Y'
+    
