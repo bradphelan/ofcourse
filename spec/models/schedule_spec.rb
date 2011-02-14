@@ -21,6 +21,7 @@ describe Schedule do
 
   it "generates time overlap queries" do
     require 'pp'
+    @schedule.id = 999
     rel = @schedule.coliding_schedules_query
     pp rel.to_sql
   end

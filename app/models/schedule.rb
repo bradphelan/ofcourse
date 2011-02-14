@@ -25,6 +25,10 @@ class Schedule < ActiveRecord::Base
   DAYS = %w(monday tuesday wednesday thursday friday saturday sunday) 
 
   validate do
+    r = Schedule.where(overlap_query)
+    if r.size == 0
+      errors.add :base, "The following schedules [#{r.map(&:id).join(', ')}] are colliding" 
+    end
   end
 
   def coliding_schedules_query
@@ -63,10 +67,18 @@ class Schedule < ActiveRecord::Base
       pred.or(d)
     end
 
+    # Exclude self
+    if id
+      id_where = schedule[:id].not_eq(id)
+    else
+      id_where = true
+    end
 
-    room_where.and(date_where).and(time_where).and(days_where)
+
+    room_where.and(date_where).and(time_where).and(days_where).and(id_where)
 
   end
+
 
   private
 
