@@ -3,12 +3,8 @@
 # Use the README file as a reference to customize settings.
 
 admin:
+  AdminUser: create, read, update, delete
   Ckeditor::Asset: create, read, update, delete
   Ckeditor::AttachmentFile: create, read, update, delete
   Ckeditor::Picture: create, read, update, delete
-  Course: create, read, update, delete
   CourseRegistration: create, read, update, delete
-  Role: create, read, update, delete
-  Schedule: create, read, update, delete
-  User: create, read, update, delete
-  Room: create, read, update, delete

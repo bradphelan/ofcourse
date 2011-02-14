@@ -42,6 +42,16 @@ Course:
   search: name
   application: ofcourse
 
+Room:
+  fields:
+    default: name
+    form: name
+  order_by: 
+  relationships: schedules
+  filters: created_at
+  search: name
+  application: ofcourse
+
 # CourseRegistration:
 #   fields:
 #     default: user_id, course_id, course, user
@@ -64,8 +74,8 @@ Role:
 
 Schedule:
   fields:
-    default: start_date, end_date, start_time, end_time, monday, tuesday, wednesday, thursday, friday, saturday, sunday, period, course
-    form: start_date, end_date, start_time, end_time, monday, tuesday, wednesday, thursday, friday, saturday, sunday, period, course
+    default: start_date, end_date, start_time, end_time, monday, tuesday, wednesday, thursday, friday, saturday, sunday, period, course, room
+    form: start_date, end_date, start_time, end_time, monday, tuesday, wednesday, thursday, friday, saturday, sunday, period, course, room
     options:
       selectors: period
   order_by: 

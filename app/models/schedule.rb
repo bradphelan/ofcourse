@@ -8,8 +8,12 @@ class Schedule < ActiveRecord::Base
   PERIOD = %w(weekly fortnightly)
   validates :period, :presence => true,  :inclusion => {:in => PERIOD }
 
-  validates :course, :presence => true
-
+  # Course association
   belongs_to :course
+  validates :course, :presence => true
   attr_readonly :course_id
+
+  # Room association
+  belongs_to :room
+  validates :room, :presence => true
 end

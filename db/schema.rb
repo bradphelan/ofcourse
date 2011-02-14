@@ -10,7 +10,10 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110214005340) do
+ActiveRecord::Schema.define(:version => 20110214042616) do
+
+  create_table "admin_users", :force => true do |t|
+  end
 
   create_table "ckeditor_assets", :force => true do |t|
     t.string   "data_file_name",                                 :null => false
@@ -43,7 +46,7 @@ ActiveRecord::Schema.define(:version => 20110214005340) do
     t.string   "name"
     t.integer  "user_id"
     t.text     "description"
-    t.datetime "date_of",     :default => '2011-02-14 01:21:33'
+    t.datetime "date_of",     :default => '2011-02-14 04:18:15'
   end
 
   add_index "courses", ["user_id"], :name => "index_courses_on_user_id"
@@ -68,6 +71,12 @@ ActiveRecord::Schema.define(:version => 20110214005340) do
     t.string   "description", :limit => 140
   end
 
+  create_table "rooms", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "name",       :null => false
+  end
+
   create_table "schedules", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -84,6 +93,7 @@ ActiveRecord::Schema.define(:version => 20110214005340) do
     t.boolean  "sunday",     :default => false
     t.integer  "course_id"
     t.string   "period",                        :null => false
+    t.integer  "room_id",                       :null => false
   end
 
   create_table "users", :force => true do |t|
@@ -102,7 +112,7 @@ ActiveRecord::Schema.define(:version => 20110214005340) do
     t.datetime "updated_at"
     t.integer  "role_id",                                               :null => false
     t.boolean  "status",                              :default => true, :null => false
-    t.text     "preferences",                                           :null => false
+    t.text     "preferences"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
