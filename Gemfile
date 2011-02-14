@@ -79,3 +79,6 @@ end
 gem "compass"
 gem "compass-susy-plugin"
 gem "rdiscount"
+
+# Fixes problem with active record Time handling
+gem "time_of_day"
