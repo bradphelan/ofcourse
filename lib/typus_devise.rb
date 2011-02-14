@@ -46,6 +46,9 @@ module Typus
           # is easier than copy and pasting
           include Typus::EnableAsTypusUser::InstanceMethods
 
+          def password_required?
+            encrypted_password.blank? || !password.blank?
+          end
 
         end
 
