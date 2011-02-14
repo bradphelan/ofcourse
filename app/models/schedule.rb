@@ -24,10 +24,13 @@ class Schedule < ActiveRecord::Base
 
   DAYS = %w(monday tuesday wednesday thursday friday saturday sunday) 
 
+  def coliding_schedules
+    Schedule.where(coliding_schedules_query)
+  end
+
   validate do
-    q = Schedule.where(coliding_schedules_query)
-    if q.count != 0
-      errors.add :base, "The following schedules [#{q.map(&:id).join(', ')}] are colliding" 
+    if coliding_schedules.count != 0
+      errors.add :base, "The schedule overlaps with (an)other(s)" 
     end
   end
 
