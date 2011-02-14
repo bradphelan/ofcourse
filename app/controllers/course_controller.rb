@@ -8,7 +8,7 @@ class CourseController < ApplicationController
   end
 
   def new
-    @course = Course.new :date_of => Time.now, 
+    @course = Course.new \ 
       :teacher => current_user, 
       :description => "Fill me in",
       :name => 'Your new course'

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110214042616) do
+ActiveRecord::Schema.define(:version => 20110214090117) do
 
   create_table "admin_users", :force => true do |t|
   end
@@ -46,7 +46,6 @@ ActiveRecord::Schema.define(:version => 20110214042616) do
     t.string   "name"
     t.integer  "user_id"
     t.text     "description"
-    t.datetime "date_of",     :default => '2011-02-14 04:18:15'
   end
 
   add_index "courses", ["user_id"], :name => "index_courses_on_user_id"

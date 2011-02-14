@@ -34,8 +34,8 @@
 
 Course:
   fields:
-    default: name,  description, date_of
-    form: name, description, date_of, teacher
+    default: name,  description
+    form: name, description, teacher
   order_by: 
   relationships: course_registrations, schedules, students, teacher
   filters: created_at
