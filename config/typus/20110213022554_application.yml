@@ -2,55 +2,55 @@
 #
 # Use the README file as a reference to customize settings.
 
-Ckeditor::Asset:
-  fields:
-    default: data_file_name, assetable_id, guid, locale, user_id, user
-    form: data_file_name, assetable_id, guid, locale, user_id, user
-  order_by: 
-  relationships: user
-  filters: created_at
-  search: 
-  application: ofcourse
+# Ckeditor::Asset:
+#   fields:
+#     default: data_file_name, assetable_id, guid, locale, user_id, user
+#     form: data_file_name, assetable_id, guid, locale, user_id, user
+#   order_by: 
+#   relationships: user
+#   filters: created_at
+#   search: 
+#   application: ofcourse
 
-Ckeditor::AttachmentFile:
-  fields:
-    default: data_file_name, assetable_id, guid, locale, user_id, user
-    form: data_file_name, assetable_id, guid, locale, user_id, user
-  order_by: 
-  relationships: user
-  filters: created_at
-  search: 
-  application: ofcourse
+# Ckeditor::AttachmentFile:
+#   fields:
+#     default: data_file_name, assetable_id, guid, locale, user_id, user
+#     form: data_file_name, assetable_id, guid, locale, user_id, user
+#   order_by: 
+#   relationships: user
+#   filters: created_at
+#   search: 
+#   application: ofcourse
 
-Ckeditor::Picture:
-  fields:
-    default: data_file_name, assetable_id, guid, locale, user_id, user
-    form: data_file_name, assetable_id, guid, locale, user_id, user
-  order_by: 
-  relationships: user
-  filters: created_at
-  search: 
-  application: ofcourse
+# Ckeditor::Picture:
+#   fields:
+#     default: data_file_name, assetable_id, guid, locale, user_id, user
+#     form: data_file_name, assetable_id, guid, locale, user_id, user
+#   order_by: 
+#   relationships: user
+#   filters: created_at
+#   search: 
+#   application: ofcourse
 
 Course:
   fields:
-    default: name, user_id, description, date_of, teacher
-    form: name, user_id, description, date_of, teacher
+    default: name,  description, date_of
+    form: name, description, date_of, teacher
   order_by: 
   relationships: course_registrations, schedules, students, teacher
   filters: created_at
   search: name
   application: ofcourse
 
-CourseRegistration:
-  fields:
-    default: user_id, course_id, course, user
-    form: user_id, course_id, course, user
-  order_by: 
-  relationships: course, user
-  filters: created_at
-  search: 
-  application: ofcourse
+# CourseRegistration:
+#   fields:
+#     default: user_id, course_id, course, user
+#     form: user_id, course_id, course, user
+#   order_by: 
+#   relationships: course, user
+#   filters: created_at
+#   search: 
+#   application: ofcourse
 
 Role:
   fields:
@@ -64,8 +64,10 @@ Role:
 
 Schedule:
   fields:
-    default: start_date, end_date, start_time, end_time, monday, tuesday, wednesday, thursday, friday, saturday, sunday, course_id, period, course
-    form: start_date, end_date, start_time, end_time, monday, tuesday, wednesday, thursday, friday, saturday, sunday, course_id, period, course
+    default: start_date, end_date, start_time, end_time, monday, tuesday, wednesday, thursday, friday, saturday, sunday, period, course
+    form: start_date, end_date, start_time, end_time, monday, tuesday, wednesday, thursday, friday, saturday, sunday, period, course
+    options:
+      selectors: period
   order_by: 
   relationships: course
   filters: created_at

@@ -5,7 +5,8 @@ class Schedule < ActiveRecord::Base
   validates :start_time, :presence => true
   validates :end_time, :presence => true
 
-  validates :period, :inclusion => {:in => %w(weekly fortnightly)}
+  PERIOD = %w(weekly fortnightly)
+  validates :period, :presence => true,  :inclusion => {:in => PERIOD }
 
   validates :course, :presence => true
 
