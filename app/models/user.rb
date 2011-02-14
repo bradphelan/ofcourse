@@ -1,3 +1,5 @@
+require 'typus_devise'
+
 class User < ActiveRecord::Base
   
   # Include default devise modules. Others available are:
@@ -21,52 +23,12 @@ class User < ActiveRecord::Base
   # Typus adaptation
   #
 
-  enable_as_typus_user
+  include Typus::Orm::ActiveRecord::User
+  enable_as_typus_devise_user
 
-  ROLE = Typus::Configuration.roles.keys.sort
-  LANGUAGE = Typus.locales
-
-  def self.authenticate(email, password)
-    resource = find_for_database_authentication({ :email=>email })
-    resource && resource.valid_password?( password ) ? resource : nil
+  alias :orole :role
+  def role
+    orole.name
   end
-
-  # Typus redefines it
-  def password_required?
-    true
-  end
-  
-  def first_name
-    email
-  end
-
-  def last_name
-  end
-
-  def preferences
-    ''
-  end
-
-  def salt
-  end
-
-  def salt=(value)
-  end
-
-  def crypted_password=(value)
-  end
-
-  def token=(value)
-  end
-
-  def preferences
-    nil
-  end
-
-  def preference
-    nil
-  end
-
-
 
 end

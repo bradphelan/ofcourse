@@ -30,65 +30,22 @@ module Typus
             r = resource && resource.valid_password?( password ) ? resource : nil
           end
 
-          def generate(*args)
-          end
-
         end
 
         module InstanceMethods
 
           def name
-            fullname = []
+            full_name = []
             if respond_to?(:first_name) && respond_to?(:last_name)
               full_name = [first_name, last_name].delete_if { |s| s.blank? }
             end
             full_name.any? ? full_name.join(" ") : email
           end
 
-          def resources
-            Typus::Configuration.roles[role].compact
-          end
+          # This includes lots of stuff we don't need but
+          # is easier than copy and pasting
+          include Typus::EnableAsTypusUser::InstanceMethods
 
-          def applications
-            Typus.applications.delete_if { |a| application(a).empty? }
-          end
-
-          def application(name)
-            Typus.application(name).delete_if { |r| !resources.keys.include?(r) }
-          end
-
-          def can?(action, resource, options = {})
-            resource = resource.model_name if resource.is_a?(Class)
-
-            return false if !resources.include?(resource)
-            return true if resources[resource].include?("all")
-
-            action = options[:special] ? action : action.acl_action_mapper
-
-            resources[resource].extract_settings.include?(action)
-          end
-
-          def cannot?(*args)
-            !can?(*args)
-          end
-
-          def is_root?
-            role == Typus.master_role
-          end
-
-          def is_not_root?
-            !is_root?
-          end
-
-          def locale
-            (preferences && preferences[:locale]) ? preferences[:locale] : ::I18n.default_locale
-          end
-
-          def locale=(locale)
-            options = { :locale => locale }
-            self.preferences ||= {}
-            self.preferences[:locale] = locale
-          end
 
         end
 
@@ -97,3 +54,33 @@ module Typus
   end
 end
 
+module Typus
+
+  module Authentication
+
+    module Session
+
+      def authenticate
+        if user_signed_in?
+          u = current_user
+          session[:typus_user_id] = u.id
+        else
+          back_to = request.env['PATH_INFO'] unless [
+            admin_dashboard_path, 
+            admin_path
+          ].include?(request.env['PATH_INFO'])
+
+          redirect_to new_user_session(:back_to => back_to)
+        end
+
+      end
+
+      def admin_user
+        current_user
+      end
+
+    end
+
+  end
+
+end

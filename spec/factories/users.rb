@@ -26,6 +26,8 @@ Factory.define :user do |f|
   f.password 'testing'
   f.password_confirmation 'testing'
   f.role singleton(:user_role)
+  f.status true
+  f.preferences({})
 end
 
 Factory.define :admin, :parent => :user do |f|

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110213215739) do
+ActiveRecord::Schema.define(:version => 20110214005340) do
 
   create_table "ckeditor_assets", :force => true do |t|
     t.string   "data_file_name",                                 :null => false
@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(:version => 20110213215739) do
     t.string   "name"
     t.integer  "user_id"
     t.text     "description"
-    t.datetime "date_of",     :default => '2011-02-13 22:13:18'
+    t.datetime "date_of",     :default => '2011-02-14 01:21:33'
   end
 
   add_index "courses", ["user_id"], :name => "index_courses_on_user_id"
@@ -87,9 +87,9 @@ ActiveRecord::Schema.define(:version => 20110213215739) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email",                               :default => "", :null => false
-    t.string   "encrypted_password",   :limit => 128, :default => "", :null => false
-    t.string   "password_salt",                       :default => "", :null => false
+    t.string   "email",                               :default => "",   :null => false
+    t.string   "encrypted_password",   :limit => 128, :default => "",   :null => false
+    t.string   "password_salt",                       :default => "",   :null => false
     t.string   "reset_password_token"
     t.string   "remember_token"
     t.datetime "remember_created_at"
@@ -100,7 +100,9 @@ ActiveRecord::Schema.define(:version => 20110213215739) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "role_id",                                             :null => false
+    t.integer  "role_id",                                               :null => false
+    t.boolean  "status",                              :default => true, :null => false
+    t.text     "preferences",                                           :null => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
