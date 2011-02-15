@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110214090117) do
+ActiveRecord::Schema.define(:version => 20110215031519) do
 
   create_table "admin_users", :force => true do |t|
   end
@@ -50,6 +50,13 @@ ActiveRecord::Schema.define(:version => 20110214090117) do
 
   add_index "courses", ["user_id"], :name => "index_courses_on_user_id"
 
+  create_table "events", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.datetime "event",       :null => false
+    t.integer  "schedule_id"
+  end
+
   create_table "rails_admin_histories", :force => true do |t|
     t.string   "message"
     t.string   "username"
@@ -79,10 +86,7 @@ ActiveRecord::Schema.define(:version => 20110214090117) do
   create_table "schedules", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.date     "start_date",                    :null => false
     t.date     "end_date",                      :null => false
-    t.time     "start_time",                    :null => false
-    t.time     "end_time",                      :null => false
     t.boolean  "monday",     :default => false
     t.boolean  "tuesday",    :default => false
     t.boolean  "wednesday",  :default => false
@@ -93,6 +97,7 @@ ActiveRecord::Schema.define(:version => 20110214090117) do
     t.integer  "course_id"
     t.string   "period",                        :null => false
     t.integer  "room_id",                       :null => false
+    t.datetime "start_date",                    :null => false
   end
 
   create_table "users", :force => true do |t|

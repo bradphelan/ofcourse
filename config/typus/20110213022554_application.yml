@@ -74,15 +74,13 @@ Role:
 
 Schedule:
   fields:
-    default: has_coliding_schedules, start_date, end_date, start_time, end_time, monday, tuesday, wednesday, thursday, friday, saturday, sunday, period, course, room
-    form: start_date, end_date, start_time, end_time, monday, tuesday, wednesday, thursday, friday, saturday, sunday, period, course, room
+    default: start_date, end_date, human_schedule, course, room
+    form: start_date, end_date, monday, tuesday, wednesday, thursday, friday, saturday, sunday, period, course, room
     options:
       selectors: period
     options:
       date_formats:
-        start_time: time_of_day
-        end_time: time_of_day
-        start_date: nice_date
+        start_date: nice_date_time
         end_date: nice_date
   order_by: 
   relationships: course

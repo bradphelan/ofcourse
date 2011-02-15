@@ -8,7 +8,9 @@ en:
   time:
     formats:
       time_of_day: '%H:%S'
+      nice_date_time: '%d %b %Y : %H:%S'
   date:
     formats:
       nice_date: '%d %b %Y'
+      nice_date_time: '%d %b %Y : %H:%S'
     

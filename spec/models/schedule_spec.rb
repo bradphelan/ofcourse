@@ -12,8 +12,6 @@ describe Schedule do
 
     @schedules = 2.times.map do 
       @course_1.schedules.build \
-        :start_time => '10:00',
-        :end_time   => '12:00',
         :start_date => Time.now,
         :end_date   => Time.now + 3.months,
         :room       => @room_0,
@@ -30,10 +28,16 @@ describe Schedule do
 
     @schedules.each { |s| s.course_id.should_not be_nil }
 
-    @schedules[0].id = 999
-    pp @schedules[0].coliding_schedules_query.to_sql
+#     @schedules[0].id = 999
+#     pp @schedules[0].coliding_schedules_query.to_sql
 
     @schedules[0].save!
-    lambda { @schedules[1].save! }.should raise_error
+    @schedules[1].save!
+
+    @schedules.each do |s|
+      pp s.build_ice.to_s
+      pp s.build_ice.remaining_occurrences
+    end
+
   end
 end

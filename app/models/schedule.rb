@@ -2,8 +2,6 @@ class Schedule < ActiveRecord::Base
   validates :start_date, :presence => true
   validates :end_date, :presence => true
 
-  validates :start_time, :presence => true
-  validates :end_time, :presence => true
 
   PERIOD = %w(weekly fortnightly)
   validates :period, :presence => true,  :inclusion => {:in => PERIOD }
@@ -17,7 +15,7 @@ class Schedule < ActiveRecord::Base
   belongs_to :room
   validates :room, :presence => true
 
-  DAYS = %w(monday tuesday wednesday thursday friday saturday sunday) 
+  DAYS = %w(monday tuesday wednesday thursday friday saturday sunday).map(&:to_sym)
 
 
 #   validate do
@@ -25,12 +23,6 @@ class Schedule < ActiveRecord::Base
 #       errors.add :base, "The schedule overlaps with (an)other(s)" 
 #     end
 #   end
-
-  validate :end_time do
-    if start_time >= end_time
-      errors.add :end_time , "End time must be greater than start time"
-    end
-  end
 
   validate :start_date do
     if start_date > end_date
@@ -46,6 +38,7 @@ class Schedule < ActiveRecord::Base
     Schedule.where(coliding_schedules_query)
   end
 
+=begin
   def coliding_schedules_query
     schedule = Schedule.arel_table
     
@@ -77,7 +70,7 @@ class Schedule < ActiveRecord::Base
     room_where = \
       schedule[:room_id].eq(room.id)
 
-    days_where = DAYS.map(&:to_sym).map do |day|
+    days_where = DAYS.map do |day|
       if self[day]
         schedule[day].eq(true)
       else
@@ -98,6 +91,39 @@ class Schedule < ActiveRecord::Base
 
 
     room_where.and(date_where).and(time_where).and(days_where).and(id_where)
+
+  end
+=end
+
+  has_many :events
+
+  after_save :refresh_events
+
+  def refresh_events
+    events.destroy_all
+  end
+
+  def human_schedule
+    build_ice.to_s
+  end
+
+  def build_ice
+    require 'ice_cube'
+    s = IceCube::Schedule.new( start_date, :end_time => end_date.to_datetime)
+
+    days = DAYS.select do |day|
+      self[day]
+    end
+
+    x = if period == 'weekly'
+          1
+        else
+          e
+        end
+
+    s.add_recurrence_rule IceCube::Rule.weekly(x).day(*days)
+
+    s
 
   end
 
