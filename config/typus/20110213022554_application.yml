@@ -74,7 +74,7 @@ Role:
 
 Schedule:
   fields:
-    default: start_date, end_date, start_time, end_time, monday, tuesday, wednesday, thursday, friday, saturday, sunday, period, course, room
+    default: has_coliding_schedules, start_date, end_date, start_time, end_time, monday, tuesday, wednesday, thursday, friday, saturday, sunday, period, course, room
     form: start_date, end_date, start_time, end_time, monday, tuesday, wednesday, thursday, friday, saturday, sunday, period, course, room
     options:
       selectors: period

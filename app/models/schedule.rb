@@ -17,22 +17,14 @@ class Schedule < ActiveRecord::Base
   belongs_to :room
   validates :room, :presence => true
 
-  # Schedule collision
-  validate do
-
-  end
-
   DAYS = %w(monday tuesday wednesday thursday friday saturday sunday) 
 
-  def coliding_schedules
-    Schedule.where(coliding_schedules_query)
-  end
 
-  validate do
-    if coliding_schedules.count != 0
-      errors.add :base, "The schedule overlaps with (an)other(s)" 
-    end
-  end
+#   validate do
+#     if coliding_schedules.count != 0
+#       errors.add :base, "The schedule overlaps with (an)other(s)" 
+#     end
+#   end
 
   validate :end_time do
     if start_time >= end_time
@@ -46,25 +38,40 @@ class Schedule < ActiveRecord::Base
     end
   end
 
+  def has_coliding_schedules
+    coliding_schedules.count != 0
+  end
+
+  def coliding_schedules
+    Schedule.where(coliding_schedules_query)
+  end
+
   def coliding_schedules_query
     schedule = Schedule.arel_table
-    schedule[:monday].eq(true)
     
     # Do Times
     
+    # With time if there is a boundary on
+    # which two dates co-inincide then overlap
+    # is considered to be false.
     time_where = overlap_query \
           schedule[:start_time],
           schedule[:end_time],
           start_time,
-          end_time
+          end_time,
+          false
 
     # Do Dates
+    # With dates if there is a boundary on
+    # which two dates co-inincide then overlap
+    # is considered to be true.
 
     date_where = overlap_query \
         schedule[:start_date],
         schedule[:end_date],
         start_date,
-        end_date
+        end_date,
+        true
 
     # Do room
     room_where = \
@@ -97,10 +104,24 @@ class Schedule < ActiveRecord::Base
 
   private
 
-  def overlap_query field_lower, field_upper, p0, p1
-    field_lower.lt(p0).and(field_upper.gt(p0)).
-      or(  field_lower.gteq(p0).and(field_upper.lteq(p1))  ). 
-      or(  field_lower.lt(p1).and(field_upper.gt(p1))  ) 
+  # --
+  # l0 < p0  && l1 > p0
+  # l0 >= p0 && l1 <= p1
+  # l0 < p1  && l1 > p1
+  # --
+  def overlap_query l0, l1, p0, p1, discrete
+
+    if discrete
+      t0 = l0.lteq(p0)   .and l1.gteq(p0)
+      t1 = l0.gteq(p0) .and l1.lteq(p1)
+      t2 = l0.lteq(p1)   .and l1.gteq(p1)
+    else
+      t0 = l0.lt(p0)   .and l1.gt(p0)
+      t1 = l0.gteq(p0) .and l1.lteq(p1)
+      t2 = l0.lt(p1)   .and l1.gt(p1)
+    end
+
+    t0.or(t1).or(t2)
   end
 
 end
