@@ -100,7 +100,14 @@ class Schedule < ActiveRecord::Base
   after_save :refresh_events
 
   def refresh_events
-    events.destroy_all
+    transaction do
+      events.destroy_all
+      ice = build_ice
+      Rails.logger.debug ice.to_s
+      ice.remaining_occurrences.each do |o|
+        events.create! :event => o
+      end
+    end
   end
 
   def human_schedule
