@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110215031519) do
+ActiveRecord::Schema.define(:version => 20110215063032) do
 
   create_table "admin_users", :force => true do |t|
   end
@@ -86,18 +86,21 @@ ActiveRecord::Schema.define(:version => 20110215031519) do
   create_table "schedules", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.date     "end_date",                      :null => false
-    t.boolean  "monday",     :default => false
-    t.boolean  "tuesday",    :default => false
-    t.boolean  "wednesday",  :default => false
-    t.boolean  "thursday",   :default => false
-    t.boolean  "friday",     :default => false
-    t.boolean  "saturday",   :default => false
-    t.boolean  "sunday",     :default => false
+    t.date     "end_date",                                        :null => false
+    t.boolean  "monday",                       :default => false
+    t.boolean  "tuesday",                      :default => false
+    t.boolean  "wednesday",                    :default => false
+    t.boolean  "thursday",                     :default => false
+    t.boolean  "friday",                       :default => false
+    t.boolean  "saturday",                     :default => false
+    t.boolean  "sunday",                       :default => false
     t.integer  "course_id"
-    t.string   "period",                        :null => false
-    t.integer  "room_id",                       :null => false
-    t.datetime "start_date",                    :null => false
+    t.string   "period",                                          :null => false
+    t.integer  "room_id",                                         :null => false
+    t.datetime "start_date",                                      :null => false
+    t.time     "duration",                                        :null => false
+    t.integer  "start_seconds_since_midnight",                    :null => false
+    t.integer  "end_seconds_since_midnight",                      :null => false
   end
 
   create_table "users", :force => true do |t|

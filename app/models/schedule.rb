@@ -3,7 +3,7 @@ class Schedule < ActiveRecord::Base
   validates :end_date, :presence => true
 
 
-  PERIOD = %w(weekly fortnightly)
+  PERIOD = %w(weekly fortnightly monthly)
   validates :period, :presence => true,  :inclusion => {:in => PERIOD }
 
   # Course association
@@ -17,12 +17,21 @@ class Schedule < ActiveRecord::Base
 
   DAYS = %w(monday tuesday wednesday thursday friday saturday sunday).map(&:to_sym)
 
+  validates :duration, :presence => true
 
-#   validate do
-#     if coliding_schedules.count != 0
-#       errors.add :base, "The schedule overlaps with (an)other(s)" 
-#     end
-#   end
+  def duration_in_seconds
+    duration.seconds_since_midnight
+  end
+
+  def duration_in_hours
+    duration_in_seconds / 60 / 60
+  end
+
+  before_save do
+    # These columns are used for doing matching queries
+    self.start_seconds_since_midnight = start_date.seconds_since_midnight
+    self.end_seconds_since_midnight   = start_date.seconds_since_midnight + duration_in_seconds
+  end
 
   validate :start_date do
     if start_date > end_date
@@ -30,76 +39,54 @@ class Schedule < ActiveRecord::Base
     end
   end
 
-  def has_coliding_schedules
-    coliding_schedules.count != 0
+  # --
+  # Return all schedules on the same room that have overlapping 
+  #   start_seconds_since_midnight
+  #   end_seconds_since_midnight
+  def possibly_coliding_schedules
+    Schedule.where(possibly_coliding_schedules_query)
   end
 
-  def coliding_schedules
-    Schedule.where(coliding_schedules_query)
-  end
+  def possibly_coliding_schedules_query
+    st = Schedule.arel_table
 
-=begin
-  def coliding_schedules_query
-    schedule = Schedule.arel_table
-    
-    # Do Times
-    
-    # With time if there is a boundary on
-    # which two dates co-inincide then overlap
-    # is considered to be false.
-    time_where = overlap_query \
-          schedule[:start_time],
-          schedule[:end_time],
-          start_time,
-          end_time,
-          false
+    oq = overlap_query \
+      st[:start_seconds_since_midnight],
+      st[:end_seconds_since_midnight],
+      start_seconds_since_midnight,
+      end_seconds_since_midnight,
+      false
 
-    # Do Dates
-    # With dates if there is a boundary on
-    # which two dates co-inincide then overlap
-    # is considered to be true.
+    rq = st[:room_id].eq(room_id)
 
-    date_where = overlap_query \
-        schedule[:start_date],
-        schedule[:end_date],
-        start_date,
-        end_date,
-        true
-
-    # Do room
-    room_where = \
-      schedule[:room_id].eq(room.id)
-
-    days_where = DAYS.map do |day|
-      if self[day]
-        schedule[day].eq(true)
-      else
-        nil
-      end
-    end.select do |p|
-      p
-    end.inject do |pred, d|
-      pred.or(d)
-    end
+    cq = st[:course_id].eq(course_id)
 
     # Exclude self
     if id
-      id_where = schedule[:id].not_eq(id)
+      idq = st[:id].not_eq(id)
     else
-      id_where = true
+      idq = true
     end
 
-
-    room_where.and(date_where).and(time_where).and(days_where).and(id_where)
+    oq.and(rq).and(cq).and(idq)
 
   end
-=end
+
+  def has_coliding_schedules
+    possibly_coliding_schedules.count != 0
+  end
+
+  def coliding_schedules
+    possibly_coliding_schedules
+  end
 
   has_many :events
 
   after_save :refresh_events
 
   def refresh_events
+    # Opening a transaction will speed
+    # the insert of the data
     transaction do
       events.destroy_all
       ice = build_ice
@@ -116,24 +103,29 @@ class Schedule < ActiveRecord::Base
 
   def build_ice
     require 'ice_cube'
-    s = IceCube::Schedule.new( start_date, :end_time => end_date.to_datetime)
+
+    # Strip the time from the start_date
+    seconds = start_date.seconds_since_midnight.seconds
+    start_date_midnight = start_date - seconds
+
+    s = IceCube::Schedule.new( start_date_midnight, :end_time => end_date.to_datetime + 1)
 
     days = DAYS.select do |day|
       self[day]
     end
 
-    x = if period == 'weekly'
-          1
-        else
-          e
+    x = case period 
+        when 'weekly'
+          s.add_recurrence_rule IceCube::Rule.weekly(1).day(*days)
+        when 'fortnightly'
+          s.add_recurrence_rule IceCube::Rule.weekly(2).day(*days)
+        when 'monthly'
+          s.add_recurrence_rule IceCube::Rule.monthly(1).day(*days)
         end
-
-    s.add_recurrence_rule IceCube::Rule.weekly(x).day(*days)
 
     s
 
   end
-
 
   private
 
