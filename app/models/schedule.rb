@@ -62,7 +62,7 @@ class Schedule < ActiveRecord::Base
     j0 = e0[:schedule_id].eq(id)
     
     # and find events on the same dates
-    j1 = e0[:event].eq(e1[:event])
+    j1 = e0[:start_at].eq(e1[:start_at])
 
     # whose times of day are overlapping
     j2 = e1[:schedule_id].in(pcsids)
@@ -123,7 +123,10 @@ class Schedule < ActiveRecord::Base
       ice = build_ice
       Rails.logger.debug ice.to_s
       ice.remaining_occurrences.each do |o|
-        events.create! :event => o
+        events.create! \
+          :start_at => o, 
+          :end_at =>(o+duration), 
+          :name => "#{course.name}:#{room.name}"
       end
     end
   end

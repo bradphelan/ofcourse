@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110215121212) do
+ActiveRecord::Schema.define(:version => 20110216001311) do
 
   create_table "admin_users", :force => true do |t|
   end
@@ -53,8 +53,10 @@ ActiveRecord::Schema.define(:version => 20110215121212) do
   create_table "events", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.datetime "event",       :null => false
+    t.datetime "start_at",    :null => false
     t.integer  "schedule_id"
+    t.datetime "end_at",      :null => false
+    t.string   "name"
   end
 
   create_table "rails_admin_histories", :force => true do |t|

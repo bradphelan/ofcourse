@@ -3,5 +3,7 @@ class Event < ActiveRecord::Base
   validates :schedule, :presence => true
 
   # TODO validate date format
-  validates :event, :presence => true
+  validates :start_at, :presence => true
+  validates :end_at, :presence => true
+  validates :name, :presence => true
 end
