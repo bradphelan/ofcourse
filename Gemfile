@@ -80,6 +80,10 @@ gem "compass"
 gem "compass-susy-plugin"
 gem "rdiscount"
 gem "ice_cube"
+gem "chronic"
+gem "chronic_duration"
+gem 'event-calendar', :require => 'event_calendar'
+
 
 # Fixes problem with active record Time handling
 gem "time_of_day"
