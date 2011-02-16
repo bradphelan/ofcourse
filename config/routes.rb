@@ -66,6 +66,8 @@ Ofcourse::Application.routes.draw do
   delete "/admin/session(.:format)" => 'devise/sessions#create', :as => :destroy_user_session
 
 
-   match '/calendar(/:year(/:month))' => 'calendar#index', :as => :calendar, :constraints => {:year => /\d{4}/, :month => /\d{1,2}/}
+  match '/calendar(/:year(/:month))' => 'calendar#index', :as => :calendar, :constraints => {:year => /\d{4}/, :month => /\d{1,2}/}
+
+  resources :events
 
 end
