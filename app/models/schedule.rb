@@ -19,24 +19,59 @@ class Schedule < ActiveRecord::Base
 
   validates :duration, :presence => true
 
-  def duration_in_seconds
-    duration.seconds_since_midnight
-  end
 
   def duration_in_hours
-    duration_in_seconds / 60 / 60
+    duration / 60 / 60
   end
 
   before_save do
     # These columns are used for doing matching queries
     self.start_seconds_since_midnight = start_date.seconds_since_midnight
-    self.end_seconds_since_midnight   = start_date.seconds_since_midnight + duration_in_seconds
+    self.end_seconds_since_midnight   = start_date.seconds_since_midnight + duration
   end
 
   validate :start_date do
     if start_date > end_date
       errors.add :end_date, "End time must be equal to or greater than start date"
     end
+  end
+
+
+  def has_coliding_events
+    coliding_events.count != 0
+  end
+
+  # --
+  # Return all coliding
+  # events
+  #
+  def coliding_events
+    cs = []
+
+    # Id's of schedules with overlapping times of day
+    pcsids = possibly_coliding_schedules.map &:id
+
+    if pcsids.size == 0
+      return []
+    end
+
+    e0 = Event.arel_table
+    e1 = Event.arel_table.alias # because we do a self join
+
+    # compare self events 
+    j0 = e0[:schedule_id].eq(id)
+    
+    # and find events on the same dates
+    j1 = e0[:event].eq(e1[:event])
+
+    # whose times of day are overlapping
+    j2 = e1[:schedule_id].in(pcsids)
+
+
+    Event.joins(e1).where(
+      j0.and(j1).and(j2)
+    )
+
   end
 
   # --
@@ -50,6 +85,12 @@ class Schedule < ActiveRecord::Base
   def possibly_coliding_schedules_query
     st = Schedule.arel_table
 
+    # Only look in the same room
+    rq = st[:room_id].eq(room_id)
+    
+    # Only look for schedules that
+    # occupy the same time of day
+    # slot
     oq = overlap_query \
       st[:start_seconds_since_midnight],
       st[:end_seconds_since_midnight],
@@ -57,9 +98,6 @@ class Schedule < ActiveRecord::Base
       end_seconds_since_midnight,
       false
 
-    rq = st[:room_id].eq(room_id)
-
-    cq = st[:course_id].eq(course_id)
 
     # Exclude self
     if id
@@ -68,17 +106,10 @@ class Schedule < ActiveRecord::Base
       idq = true
     end
 
-    oq.and(rq).and(cq).and(idq)
+    oq.and(rq).and(idq)
 
   end
 
-  def has_coliding_schedules
-    possibly_coliding_schedules.count != 0
-  end
-
-  def coliding_schedules
-    possibly_coliding_schedules
-  end
 
   has_many :events
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110215063032) do
+ActiveRecord::Schema.define(:version => 20110215121212) do
 
   create_table "admin_users", :force => true do |t|
   end
@@ -98,9 +98,9 @@ ActiveRecord::Schema.define(:version => 20110215063032) do
     t.string   "period",                                          :null => false
     t.integer  "room_id",                                         :null => false
     t.datetime "start_date",                                      :null => false
-    t.time     "duration",                                        :null => false
     t.integer  "start_seconds_since_midnight",                    :null => false
     t.integer  "end_seconds_since_midnight",                      :null => false
+    t.integer  "duration",                                        :null => false
   end
 
   create_table "users", :force => true do |t|

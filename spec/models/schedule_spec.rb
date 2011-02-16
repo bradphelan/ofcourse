@@ -1,5 +1,11 @@
 require 'spec_helper'
 
+def time h, m
+  t = Time.now
+  t = t - t.seconds_since_midnight
+  t = t + h.hours + m.minutes
+end
+
 describe Schedule do
 
   before do
@@ -7,37 +13,53 @@ describe Schedule do
 
     @course_1 = Factory.create :course, :teacher => @teach
     @course_2 = Factory.create :course, :teacher => @teach
+    @course_3 = Factory.create :course, :teacher => @teach
 
     @room_0 = Room.create :name => '3a'
 
-    @schedules = 2.times.map do 
-      @course_1.schedules.build \
-        :start_date => Time.now,
-        :end_date   => Time.now + 3.months,
-        :room       => @room_0,
-        :monday     => true,
-        :wednesday  => true,
-        :friday     => true,
-        :period     => 'weekly'
+    @sched_1 = @course_1.schedules.create \
+      :start_date => time(12,0),
+      :end_date => time(12,0) + 3.months,
+      :duration   => 5.hours,
+      :room       => @room_0,
+      :monday     => true,
+      :wednesday  => true,
+      :friday     => true,
+      :period     => 'weekly'
         
-    end
+
+    @sched_2 = @course_2.schedules.create \
+      :start_date => time(12,0),
+      :end_date => time(12,0) + 3.months,
+      :duration   => 5.hours,
+      :room       => @room_0,
+      :monday     => true,
+      :wednesday  => true,
+      :friday     => true,
+      :period     => 'weekly'
+
+    @sched_3 = @course_3.schedules.create \
+      :start_date => time(12,0),
+      :end_date => time(12,0) + 3.months,
+      :duration   => 5.hours,
+      :room       => @room_0,
+      :monday     => true,
+      :wednesday  => true,
+      :friday     => true,
+      :period     => 'weekly'
   end
 
+        
   it "generates time overlap queries" do
     require 'pp'
 
-    @schedules.each { |s| s.course_id.should_not be_nil }
+    pp @sched_1
+    pp @sched_2
+    pp @sched_3
 
-#     @schedules[0].id = 999
-#     pp @schedules[0].coliding_schedules_query.to_sql
-
-    @schedules[0].save!
-    @schedules[1].save!
-
-    @schedules.each do |s|
-      pp s.build_ice.to_s
-      pp s.build_ice.remaining_occurrences
-    end
+    @sched_1.coliding_events.count.should_not == 0
+    @sched_2.coliding_events.count.should_not == 0
+    @sched_3.coliding_events.count.should_not == 0
 
   end
 end
