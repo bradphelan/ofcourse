@@ -6,6 +6,16 @@ GIT
     ckeditor (3.5.0)
       mime-types (>= 1.16)
 
+GIT
+  remote: https://github.com/fesplugas/typus.git
+  revision: 1c0609180c8766bd649b9481d5bed3c8234e6d83
+  branch: wip/devise
+  specs:
+    typus (3.0.8)
+      bcrypt-ruby
+      render_inheritable
+      will_paginate (~> 3.0.pre2)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -86,7 +96,6 @@ GEM
     factory_girl_rails (1.0.1)
       factory_girl (~> 1.3)
       railties (>= 3.0.0)
-    fastercsv (1.5.4)
     ffi (0.6.3)
       rake (>= 0.8.7)
     formtastic (1.1.0)
@@ -173,8 +182,6 @@ GEM
       thor (~> 0.14.4)
     rake (0.8.7)
     rb-fsevent (0.3.10)
-    rb-inotify (0.8.4)
-      ffi (>= 0.5.0)
     rdiscount (1.6.8)
     remarkable (4.0.0.alpha4)
       rspec (>= 2.0.0.alpha11)
@@ -223,10 +230,6 @@ GEM
       activesupport (>= 3.0.0)
     treetop (1.4.9)
       polyglot (>= 0.3.1)
-    typus (3.0.6)
-      fastercsv (~> 1.5)
-      render_inheritable
-      will_paginate (~> 3.0.pre2)
     tzinfo (0.3.24)
     warden (1.0.3)
       rack (>= 1.0.0)
@@ -268,7 +271,6 @@ DEPENDENCIES
   rails-erd
   rails3-generators
   rb-fsevent
-  rb-inotify
   rdiscount
   remarkable_activemodel (>= 4.0.0.alpha4)
   rest-client
@@ -276,4 +278,4 @@ DEPENDENCIES
   ruby-debug19
   spork
   time_of_day
-  typus
+  typus!

@@ -19,7 +19,7 @@ gem 'devise'
 gem 'ckeditor', :git => 'git://github.com/galetahub/rails-ckeditor.git', :branch => 'rails3'
 gem 'paperclip'
 
-gem 'typus'
+gem 'typus', :git => 'https://github.com/fesplugas/typus.git', :branch => "wip/devise"
 
 # Use unicorn as the web server
 # gem 'unicorn'
@@ -64,7 +64,7 @@ group :development do
   gem 'spork'
   gem 'rb-fsevent'
   gem 'guard-spork'
-  gem 'rb-inotify'
+  #gem 'rb-inotify'
 
   gem 'guard'
   gem 'guard-bundler'
