@@ -1,4 +1,4 @@
-require 'typus_devise'
+#require 'typus_devise'
 
 class User < ActiveRecord::Base
   
@@ -23,8 +23,7 @@ class User < ActiveRecord::Base
   # Typus adaptation
   #
 
-  include Typus::Orm::ActiveRecord::User
-  enable_as_typus_devise_user
+  include Typus::Orm::ActiveRecord::User::InstanceMethods
 
   alias :orole :role
   def role

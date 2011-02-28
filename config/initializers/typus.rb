@@ -26,5 +26,19 @@ Typus.setup do |config|
   # config.pagination = { :previous_label => "&larr; " + Typus::I18n.t("Previous"),
   #                       :next_label => Typus::I18n.t("Next") + " &rarr;" }
 
+  # Define authentication: +:none+, +:http_basic+, +:session+
+  config.authentication = :devise
+
+  # Define master_role.
+  config.master_role = "admin"
+
+  # Define relationship.
+  # config.relationship = "typus_users"
+
+  # Define user_class_name.
+  config.user_class_name = "User"
+
+  # Define user_fk.
+  config.user_fk = "user_id"
 end
 
