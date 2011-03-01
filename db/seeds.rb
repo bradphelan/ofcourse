@@ -21,6 +21,11 @@ end
 end
 
 
+10.times do |i|
+  Factory.create :room
+end
+
+
 Factory.create :admin
  
   
