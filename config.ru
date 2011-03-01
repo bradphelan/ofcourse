@@ -6,12 +6,14 @@ require ::File.expand_path('../config/environment',  __FILE__)
 require 'sass/plugin/rack'
 use Sass::Plugin::Rack
 require "fileutils"
-cssdir = File.expand_path("../tmp/stylesheets/compiled", __FILE__)
+cssdir = File.expand_path("../tmp/sass", __FILE__)
 cachedir = File.expand_path("../tmp/sass-cache", __FILE__)
 FileUtils.mkdir_p(cssdir)
 FileUtils.mkdir_p(cachedir)
 
-use Rack::Static, :urls => ["/stylesheets/compiled"], :root => "tmp"
+use Rack::Static, 
+  :urls => ["/sass"], 
+  :root => "tmp"
 
 Sass::Plugin.options[:css_location] = cssdir
 Sass::Plugin.options[:cache_location] = cachedir

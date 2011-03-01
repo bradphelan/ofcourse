@@ -15,7 +15,9 @@ class EventsController < ApplicationController
         :description => event.schedule.course.description || "Some cool description here...", 
         :start => "#{event.start_at.iso8601}", :end => "#{event.end_at.iso8601}", 
         :allDay => event.all_day, :recurring => true,
-        :url => "admin/courses/edit/#{event.schedule.course.id}"
+        :url => "admin/courses/edit/#{event.schedule.course.id}",
+        :className => "cal-event-3",
+        :editable => false,
       }
     end
   end

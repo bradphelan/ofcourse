@@ -1,0 +1,19 @@
+=accessible-color($background: white)
+  @if lightness($background) >= 65%
+    color: black
+  @else
+    color: white
+
+=full-calendar-event($name: "event", $color: black, $lighten: 0%)
+  .cal-event-#{$name}, .fc-agenda .cal-event-#{$name} .fc-event-time, .cal-event-#{$name} a
+    background-color: $color
+    border-color: lighten($color, 20%)
+    color: accessible-color($color)
+    
++full-calendar-event(0, red)    
++full-calendar-event(1, green)    
++full-calendar-event(2, blue)    
+
++full-calendar-event(3, red, 20)    
++full-calendar-event(6, green, 20)    
++full-calendar-event(7, blue, 20)    
