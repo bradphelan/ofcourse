@@ -51,6 +51,9 @@ Room:
   filters: created_at
   search: name
   application: ofcourse
+  actions:
+    index:
+    edit: show_calendar
 
 # CourseRegistration:
 #   fields:

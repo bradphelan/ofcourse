@@ -11,4 +11,4 @@ admin:
   Role: create, read, update, delete
   Schedule: create, read, update, delete
   User: create, read, update, delete
-  Room: create, read, update, delete
+  Room: create, read, update, delete, show_calendar
