@@ -27,7 +27,7 @@ class Schedule < ActiveRecord::Base
   before_save do
     # These columns are used for doing matching queries
     self.start_seconds_since_midnight = start_date.seconds_since_midnight
-    self.end_seconds_since_midnight   = start_date.seconds_since_midnight + duration
+    self.end_seconds_since_midnight   = start_date.seconds_since_midnight + duration.hours
   end
 
   validate :start_date do
