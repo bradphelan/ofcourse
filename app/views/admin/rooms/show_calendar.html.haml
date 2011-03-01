@@ -1,0 +1,40 @@
+- content_for :javascripts do
+  = javascript_include_tag "fullcalendar.min.js"
+
+- content_for :stylesheets do
+  = stylesheet_link_tag "fullcalendar"
+
+:javascript
+  $(document).ready(function(){
+      // page is now ready, initialize the calendar...
+      $('#calendar').fullCalendar({
+          editable: true,
+          header: {
+              left: 'prev,next today',
+              center: 'title',
+              right: 'month,agendaWeek,agendaDay'
+          },
+          defaultView: 'agendaWeek',
+          height: 500,
+          slotMinutes: 15,
+          loading: function(bool){
+              if (bool) 
+                  $('#loading').show();
+              else 
+                  $('#loading').hide();
+          },
+          events: "/events.json",
+          timeFormat: 'h:mm t{ - h:mm t} ',
+          dragOpacity: "0.5",
+          
+          
+          eventClick: function(event, jsEvent, view){
+              showEventDetails(event);
+          },
+      
+      });
+  });
+
+.container
+  #calendar
+
