@@ -133,11 +133,7 @@ class Schedule < ActiveRecord::Base
   def build_ice
     require 'ice_cube'
 
-    # Strip the time from the start_date
-    seconds = start_date.seconds_since_midnight.seconds
-    start_date_midnight = start_date - seconds
-
-    s = IceCube::Schedule.new( start_date_midnight, :end_time => end_date.to_datetime + 1)
+    s = IceCube::Schedule.new( start_date, :end_time => end_date.to_datetime + 1)
 
     days = DAYS.select do |day|
       self[day]
