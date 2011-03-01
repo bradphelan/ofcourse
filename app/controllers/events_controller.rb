@@ -1,5 +1,15 @@
 class EventsController < ApplicationController
 
+  class CssGenerator
+    def initialize
+      @numbers = {}
+    end 
+
+    def class_for name
+      @numbers[name] ||= "cal-event-#{@numbers.size}"
+    end
+  end
+
   # index
   def index
     render :text => events.to_json
@@ -8,7 +18,11 @@ class EventsController < ApplicationController
   private
   
   def events
+
+    cssgen = CssGenerator.new
+
     events_query.map do |event|
+
       {
         :id => event.id, 
         :title => event.name, 
@@ -16,10 +30,14 @@ class EventsController < ApplicationController
         :start => "#{event.start_at.iso8601}", :end => "#{event.end_at.iso8601}", 
         :allDay => event.all_day, :recurring => true,
         :url => "admin/courses/edit/#{event.schedule.course.id}",
-        :className => "cal-event-3",
+        :className => cssgen.class_for(event.name),
         :editable => false,
       }
     end
+  end
+
+  def gen_css_class name
+    "cal-event-#{name.hash % 10}"
   end
 
   def events_query
