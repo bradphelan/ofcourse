@@ -6,9 +6,9 @@
 
 =full-calendar-event($name: "event", $color: black, $lighten: 0%)
   .cal-event-#{$name}, .fc-agenda .cal-event-#{$name} .fc-event-time, .cal-event-#{$name} a
-    background-color: $color
-    border-color: lighten($color, 20%)
-    color: accessible-color($color)
+    background-color: $color !important
+    border-color: lighten($color, 20%) !important
+    color: accessible-color($color) !important
     
 +full-calendar-event(0, red)    
 +full-calendar-event(1, green)    
