@@ -81,7 +81,6 @@ Schedule:
     form: start_date, duration, end_date, monday, tuesday, wednesday, thursday, friday, saturday, sunday, period, course, room
     options:
       selectors: period
-      read_only: course
       date_formats:
         start_date: nice_date_time
         end_date: nice_date
