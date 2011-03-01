@@ -1,0 +1,65 @@
+-  page_title = Typus::I18n.t("Edit %{resource}", :resource => @resource.model_name.human)
+-  title(page_title)
+
+- content_for :sidebar do 
+  - build_sidebar.present? ? build_sidebar : render("admin/templates/profile_sidebar")
+
+%h2
+  = page_title
+  %small 
+    = list_actions
+
+= display_link_to_previous
+= display_flash_message
+= render 'edit'
+
+
+-  options = params.dup.cleanup.merge!(:action => 'update')
+-  button = Typus::I18n.t("Save %{resource}", :resource => @resource.model_name.human)
+
+= render :partial => 'form', :locals => { :options => options, :button => button } 
+
+= typus_relationships 
+
+- content_for :javascripts do
+  = javascript_include_tag "fullcalendar.min.js"
+
+- content_for :stylesheets do
+  = stylesheet_link_tag "fullcalendar"
+
+%h3 Calendar
+
+:javascript
+  $(document).ready(function(){
+      // page is now ready, initialize the calendar...
+      $('#calendar').fullCalendar({
+          editable: true,
+          header: {
+              left: 'prev,next today',
+              center: 'title',
+              right: 'month,agendaWeek,agendaDay'
+          },
+          defaultView: 'agendaWeek',
+          height: 800,
+          slotMinutes: 15,
+          loading: function(bool){
+              if (bool) 
+                  $('#loading').show();
+              else 
+                  $('#loading').hide();
+          },
+          events: "/events.json",
+          timeFormat: 'h:mm t{ - h:mm t} ',
+          dragOpacity: "0.5",
+          
+          
+          eventClick: function(event, jsEvent, view){
+              showEventDetails(event);
+          },
+      
+      });
+  });
+
+.container
+  #calendar
+
