@@ -8,4 +8,5 @@
 <li id="<%= attribute %>">
   <%= form.label related_fk, "#{label_text} <small>#{message}</small>".html_safe %>
   <%= form.select related_fk, values, options, html_options %>
+  goto <%= display_belongs_to @item, attribute %>
 </li>
