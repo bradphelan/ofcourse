@@ -19,11 +19,6 @@ class Schedule < ActiveRecord::Base
 
   validates :duration, :presence => true
 
-
-  def duration_in_hours
-    duration / 60 / 60
-  end
-
   before_save do
     # These columns are used for doing matching queries
     self.start_seconds_since_midnight = start_date.seconds_since_midnight
@@ -125,7 +120,7 @@ class Schedule < ActiveRecord::Base
       ice.remaining_occurrences.each do |o|
         events.create! \
           :start_at => o, 
-          :end_at =>(o+duration), 
+          :end_at =>(o+duration.hours), 
           :name => "#{course.name}:#{room.name}"
       end
     end
