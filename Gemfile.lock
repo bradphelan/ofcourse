@@ -1,20 +1,20 @@
 GIT
-  remote: git://github.com/galetahub/rails-ckeditor.git
-  revision: 9cacf3f9f3f987d1dffbde89eeb03ab6fdc999c5
-  branch: rails3
-  specs:
-    ckeditor (3.5.0)
-      mime-types (>= 1.16)
-
-GIT
-  remote: https://github.com/fesplugas/typus.git
-  revision: 1c0609180c8766bd649b9481d5bed3c8234e6d83
+  remote: git://github.com/fesplugas/typus.git
+  revision: 2d6df579e2e0b3891827f2ac07c3fe1bba4ca551
   branch: wip/devise
   specs:
     typus (3.0.8)
       bcrypt-ruby
       render_inheritable
       will_paginate (~> 3.0.pre2)
+
+GIT
+  remote: git://github.com/galetahub/rails-ckeditor.git
+  revision: 9cacf3f9f3f987d1dffbde89eeb03ab6fdc999c5
+  branch: rails3
+  specs:
+    ckeditor (3.5.0)
+      mime-types (>= 1.16)
 
 GEM
   remote: http://rubygems.org/
