@@ -84,6 +84,8 @@ gem "chronic"
 gem "chronic_duration"
 gem 'event-calendar', :require => 'event_calendar'
 
+gem "heroku"
+
 
 # Fixes problem with active record Time handling
 gem "time_of_day"
