@@ -11,6 +11,12 @@
   <%= page_title %>
 </h2>
 
-<%= applications %>
+<% if admin_user.applications.any? %>
+  <%= render 'applications' %>
+<% else %>
+  <div class="notice">
+    No applications detected.
+  </div>
+<% end %>
 
 <%= resources(admin_user) %>
