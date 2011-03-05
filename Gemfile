@@ -86,6 +86,8 @@ gem 'event-calendar', :require => 'event_calendar'
 
 gem "heroku"
 
+gem "fastercsv"
+
 
 # Fixes problem with active record Time handling
 gem "time_of_day"
