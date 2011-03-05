@@ -19,8 +19,6 @@
 
 = render :partial => 'form', :locals => { :options => options, :button => button } 
 
-= typus_relationships 
-
 - content_for :javascripts do
   = javascript_include_tag "fullcalendar.min.js"
 
@@ -41,8 +39,11 @@
               right: 'month,agendaWeek,agendaDay'
           },
           defaultView: 'month',
-          height: 800,
-          slotMinutes: 15,
+          height: 600,
+          slotMinutes: 30,
+          firstHour: 10,
+          allDaySlot: false,
+          minTime: 6,
           loading: function(bool){
               if (bool) 
                   $('#loading').show();
@@ -63,4 +64,6 @@
 
 .container
   #calendar
+
+= typus_relationships 
 

@@ -77,7 +77,7 @@ Role:
 
 Schedule:
   fields:
-    default: has_coliding_events, start_date, duration, end_date, human_schedule, course, room
+    default: start_date, duration, human_schedule, course, room, has_coliding_events
     form: start_date, duration, end_date, monday, tuesday, wednesday, thursday, friday, saturday, sunday, period, course, room
     options:
       selectors: period
