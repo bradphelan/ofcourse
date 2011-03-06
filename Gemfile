@@ -74,6 +74,8 @@ group :development do
   gem 'guard-sass'
   gem 'ruby-debug19'
   gem 'rest-client'
+
+  gem "taps" # for heroku db:pull and heroku db:push
 end
 
 gem "compass"
@@ -91,3 +93,7 @@ gem "fastercsv"
 
 # Fixes problem with active record Time handling
 gem "time_of_day"
+
+
+# Postgres gem
+gem "pg"

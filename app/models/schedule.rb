@@ -63,10 +63,8 @@ class Schedule < ActiveRecord::Base
     j2 = e1[:schedule_id].in(pcsids)
 
 
-    Event.joins(e1).where(
-      j0.and(j1).and(j2)
-    )
-
+    q = e0.join(e1).on(j1)
+    Event.joins(q.join_sql).where(j0.and(j2))
   end
 
   # --
