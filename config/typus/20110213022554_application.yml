@@ -93,7 +93,7 @@ Schedule:
 User:
   fields:
     default: email
-    form: email 
+    form: email, password, password_confirmation, role 
   order_by: 
   relationships: presentations, courses, role
   filters: 
