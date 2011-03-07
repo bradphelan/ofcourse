@@ -41,6 +41,10 @@ class Schedule < ActiveRecord::Base
   # events
   #
   def coliding_events
+    
+
+    # TODO scope this by room. ie an event is only in
+    # collision when it is in the same room as another
 
     e0 = Event.arel_table
     e1 = Event.arel_table.alias # because we do a self join
