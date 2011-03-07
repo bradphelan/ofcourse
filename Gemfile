@@ -19,7 +19,8 @@ gem 'devise'
 gem 'ckeditor', :git => 'git://github.com/galetahub/rails-ckeditor.git', :branch => 'rails3'
 gem 'paperclip'
 
-gem 'typus', :git => 'git@github.com:bradphelan/typus.git', :branch => "wip/devise"
+gem 'typus', :git => 'git://github.com/bradphelan/typus.git', :branch => "wip/devise"
+
 
 # Use unicorn as the web server
 # gem 'unicorn'
