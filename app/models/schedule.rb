@@ -41,30 +41,26 @@ class Schedule < ActiveRecord::Base
   # events
   #
   def coliding_events
-    cs = []
-
-    # Id's of schedules with overlapping times of day
-    pcsids = possibly_coliding_schedules.map &:id
-
-    if pcsids.size == 0
-      return []
-    end
 
     e0 = Event.arel_table
     e1 = Event.arel_table.alias # because we do a self join
 
     # compare self events 
     j0 = e0[:schedule_id].eq(id)
+    j1 = e1[:schedule_id].not_eq(id)
     
     # and find events on the same dates
-    j1 = e0[:start_at].eq(e1[:start_at])
+    j2 = overlap_query \
+      e0[:start_at],
+      e0[:end_at],
+      e1[:start_at],
+      e1[:end_at],
+      false
 
-    # whose times of day are overlapping
-    j2 = e1[:schedule_id].in(pcsids)
 
+    q = e0.join(e1).on(j0.and(j1))
 
-    q = e0.join(e1).on(j1)
-    Event.joins(q.join_sql).where(j0.and(j2))
+    Event.joins(q.join_sql).where(j2)
   end
 
   # --
