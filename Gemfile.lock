@@ -1,9 +1,9 @@
 GIT
   remote: git://github.com/bradphelan/typus.git
-  revision: b214e2d6b906a0c987652685f28b36d09bd8a661
+  revision: 859bad81954b52f3ad59983d05c9ac343158326b
   branch: wip/devise
   specs:
-    typus (3.0.8)
+    typus (3.0.9)
       bcrypt-ruby
       render_inheritable
       will_paginate (~> 3.0.pre2)
