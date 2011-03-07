@@ -30,13 +30,20 @@ class EventsController < ApplicationController
 
     events_query.where(room_q).joins(:schedule).map do |event|
 
+      course = event.schedule.course
+      url =  url_for \
+        :controller => "admin/" + course.class.to_resource,
+        :action => course.class.typus_options_for(:default_action_on_item),
+        :id => course.id
+      
+
       {
         :id => event.id, 
         :title => event.name, 
         :description => event.schedule.course.description || "Some cool description here...", 
         :start => "#{event.start_at.iso8601}", :end => "#{event.end_at.iso8601}", 
         :allDay => event.all_day, :recurring => true,
-        :url => "admin/courses/edit/#{event.schedule.course.id}",
+        :url => url,
         :className => cssgen.class_for(event.name),
         :editable => false,
       }
