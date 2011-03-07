@@ -50,7 +50,7 @@
               else 
                   $('#loading').hide();
           },
-          events: "/events.json",
+          events: "/events.json?room=#{@item.id}",
           timeFormat: 'h:mm t{ - h:mm t} ',
           dragOpacity: "0.5",
           

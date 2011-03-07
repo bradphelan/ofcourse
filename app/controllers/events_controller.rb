@@ -19,9 +19,16 @@ class EventsController < ApplicationController
   
   def events
 
+    Rails.logger.info "BPH"
+    Rails.logger.info params[:room]
+
     cssgen = CssGenerator.new
 
-    events_query.map do |event|
+    st = Schedule.arel_table
+
+    room_q = st[:room_id].eq(params[:room])
+
+    events_query.where(room_q).joins(:schedule).map do |event|
 
       {
         :id => event.id, 
