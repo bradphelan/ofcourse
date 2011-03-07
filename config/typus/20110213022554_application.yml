@@ -39,7 +39,7 @@ Course:
   order_by: 
   relationships: course_registrations, schedules, students, teacher
   filters: created_at
-  search: name
+  search: name, description
   application: ofcourse
 
 Room:
@@ -72,7 +72,7 @@ Role:
   order_by: 
   relationships: users
   filters: created_at
-  search: name
+  search: name, description
   application: ofcourse
 
 Schedule:
@@ -86,17 +86,17 @@ Schedule:
         end_date: nice_date
   order_by: 
   relationships: course
-  filters: created_at
-  search: 
+  filters: 
+  search: description
   application: ofcourse
 
 User:
   fields:
-    default: email, remember_token, sign_in_count, current_sign_in_at, last_sign_in_at, current_sign_in_ip, last_sign_in_ip
+    default: email
     form: email 
   order_by: 
   relationships: presentations, courses, role
-  filters: created_at
-  search: 
+  filters: 
+  search: email
   application: ofcourse
 
