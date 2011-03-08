@@ -1,6 +1,10 @@
 -  page_title = Typus::I18n.t("Edit %{resource}", :resource => @resource.model_name.human)
 -  title(page_title)
 
+= content_for :sidebar do
+  = build_sidebar.present? ? build_sidebar : render("admin/templates/profile_sidebar")
+
+
 - content_for :sidebar do 
   - build_sidebar.present? ? build_sidebar : render("admin/templates/profile_sidebar")
 
